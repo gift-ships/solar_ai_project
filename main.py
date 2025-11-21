@@ -12,8 +12,7 @@ import urequests
 url = "http://oepnweathermap.org/api"
 headers = { "Content-Type": "application/json"
     }
-wf_ssid = "VC-1053-8861"
-wf_pass = "0fa8bdc688"
+
 
 MQTT_BROKER = "102.220.86.237" #"test.mosquitto.org" #"102.220.86.237" 
 MQTT_CLIENT_ID= ubinascii.hexlify(machine.unique_id())
@@ -21,17 +20,6 @@ MQTT_PORT = 1883
 UserName = "playerone"
 User_PassWord = "challengeaccepted"
  
-def connect_to_wifi(ssid,password):
-    sta_if = network.WLAN(network.STA_IF)
-    sta_if.active(True)
-    if not sta_if.isconnected():
-        print("Connect")
-        sta_if.connect(ssid,password)
-        while not sta_if.isconnected():
-            time.sleep(1)
-            
-    print("connected")
-    print("IP Address:",sta_if.ifconfig()[0])
 def connect_client():
     try:
         client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT,user="playerone",password= "challengeaccepted")
@@ -80,7 +68,6 @@ topic = "icemachine/" + MQTT_CLIENT_ID.decode("uft-8")
 print(topic)
 
 def initilize():
-    connect_to_wifi(wf_ssid,wf_pass)
     APIKey = '6c4c8cd23f16a882b1d4f0b6b931dbe2'
     data = {}
     response = urequests.post("http://api.openweathermap.org/data/2.5/weather?q=Benoni,ZAF&appid="+ APIKey+"&units=metric",json=data)
