@@ -1,2 +1,2 @@
-def wf_ssid = "VC-1053-8861"
-def wf_pass = "0fa8bdc688"
+SSID = "VR-5217-4985"
+PASSWORD = "h3c3upw2"
